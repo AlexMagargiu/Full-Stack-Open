@@ -1,16 +1,28 @@
 import { useState } from "react";
 
+function StatisticLine(props) {
+  return (
+    <p>
+      {props.text} {props.value}
+    </p>
+  );
+}
+
 function Statistics(props) {
   return (
     <div>
-      <p>good {props.good}</p>
-      <p>neutral {props.neutral}</p>
-      <p>bad {props.bad}</p>
-      <p>all {props.total}</p>
-      <p>average {props.average}</p>
-      <p>positive {props.positive}%</p>
+      <StatisticLine text="good" value={props.good} />
+      <StatisticLine text="neutral" value={props.neutral} />
+      <StatisticLine text="bad" value={props.bad} />
+      <StatisticLine text="all" value={props.total} />
+      <StatisticLine text="average" value={props.average} />
+      <StatisticLine text="positive" value={props.positive} />
     </div>
   );
+}
+
+function Button(props) {
+  return <button onClick={props.handleClick}>{props.text}</button>;
 }
 
 export default function App() {
@@ -45,9 +57,9 @@ export default function App() {
   return (
     <div>
       <h1>give feedback</h1>
-      <button onClick={handleGoodButton}>good</button>
-      <button onClick={handleNeutralButton}>neutral</button>
-      <button onClick={handleBadButton}>bad</button>
+      <Button handleClick={handleGoodButton} text="good" />
+      <Button handleClick={handleNeutralButton} text="neutral" />
+      <Button handleClick={handleBadButton} text="bad" />
       <h1>statistics</h1>
       {good || neutral || bad ? (
         <Statistics
