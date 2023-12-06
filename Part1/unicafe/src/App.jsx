@@ -16,6 +16,19 @@ export default function App() {
   function handleBadButton() {
     setBad(bad + 1);
   }
+
+  function calculateTotalFeedback() {
+    return good + neutral + bad;
+  }
+
+  function calculateAverageFeedback() {
+    return (good - bad) / calculateTotalFeedback();
+  }
+
+  function calculatePositiveFeedback() {
+    return (good / calculateTotalFeedback()) * 100;
+  }
+
   return (
     <div>
       <h1>give feedback</h1>
@@ -26,6 +39,9 @@ export default function App() {
       <p>good {good}</p>
       <p>neutral {neutral}</p>
       <p>bad {bad}</p>
+      <p>all {calculateTotalFeedback()}</p>
+      <p>average {calculateAverageFeedback()}</p>
+      <p>positive {calculatePositiveFeedback()}%</p>
     </div>
   );
 }
