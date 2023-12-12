@@ -14,6 +14,7 @@ export default function App() {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
+  const [mostVoted, setMostVoted] = useState(0);
 
   function getRandomNumber() {
     return Math.floor(Math.random() * anecdotes.length);
@@ -23,16 +24,23 @@ export default function App() {
     const newVotes = [...votes];
     newVotes[selected] += 1;
     setVotes(newVotes);
+    if (newVotes[selected] > newVotes[mostVoted]) {
+      setMostVoted(selected);
+    }
   }
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       <p>{anecdotes[selected]}</p>
       <p>has {votes[selected]} votes</p>
       <button onClick={handleVote}>vote</button>
       <button onClick={() => setSelected(getRandomNumber())}>
         next anecdote
       </button>
+      <h1>Anecdote with most votes</h1>
+      <p>{anecdotes[mostVoted]}</p>
+      <p>has {votes[mostVoted]} votes</p>
     </div>
   );
 }
