@@ -9,19 +9,28 @@ export default function App() {
     "Premature optimization is the root of all evil.",
     "Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.",
     "Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.",
-    "The only way to go fast, is to go well.",
+    "The only way to go fast is to go well.",
   ];
 
   const [selected, setSelected] = useState(0);
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0));
 
   function getRandomNumber() {
     return Math.floor(Math.random() * anecdotes.length);
   }
 
+  function handleVote() {
+    const newVotes = [...votes];
+    newVotes[selected] += 1;
+    setVotes(newVotes);
+  }
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
-      <button onClick={() => setSelected(getRandomNumber)}>
+      <p>has {votes[selected]} votes</p>
+      <button onClick={handleVote}>vote</button>
+      <button onClick={() => setSelected(getRandomNumber())}>
         next anecdote
       </button>
     </div>
